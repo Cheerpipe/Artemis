@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -104,12 +104,12 @@ public sealed class Profile : ProfileElement
             foreach (ProfileScript profileScript in Scripts)
                 profileScript.OnProfileUpdated(deltaTime);
 
-            const double OPACITY_PER_SECOND = 1;
-            
+            const double TRANSITION_TIME = 0.5d;
+
             if (ShouldBeEnabled && Opacity < 1)
-                Opacity = Math.Clamp(Opacity + OPACITY_PER_SECOND * deltaTime, 0d, 1d);
+                Opacity = Math.Clamp(Opacity + deltaTime / TRANSITION_TIME, 0d, 1d);
             if (!ShouldBeEnabled && Opacity > 0)
-                Opacity = Math.Clamp(Opacity - OPACITY_PER_SECOND * deltaTime, 0d, 1d);
+                Opacity = Math.Clamp(Opacity - deltaTime / TRANSITION_TIME, 0d, 1d);
         }
     }
 
